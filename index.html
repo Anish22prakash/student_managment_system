@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student-managemnet-system</title>
+    <style>
+        #a1ns{
+            border: 1px solid;
+            width: 40%;
+            height: auto;
+            background-color:green;
+            border-radius: 5px;
+        }
+        #a1ns>h1{
+           margin-left: 18%;
+           color: white;
+        }
+        form {
+            margin: 0 auto;
+            margin-top: 50px;
+            width: 50%;
+            box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+            padding: 30px;
+          }
+          input[type="text"],
+            input[type="url"],
+            textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+          }
+          input[type="submit"] {
+            background-color:white;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 20px;
+            color: black;
+            }
+            label{
+                font-size: 20px;
+                color: white;
+            }
+            input[type="submit"]:hover{
+                background-color:blueviolet;
+            }
+        
+    </style>
+</head>
+<body>
+    <div id="a1ns">
+      <h1>Student Management System</h1>
+      <form id="form" onsubmit="myfunc(event)">
+          <label>Student name</label><br>
+          <input type="text" id="name"><br>
+          <label>Student image url</label><br>
+          <input type="url" id="url"><br>
+          <label>Course</label><br>
+          <input type="text" id="course"><br>
+          <label>Unit</label><br>
+          <input type="text" id="unit"><br>
+          <label>Batch</label><br>
+          <input type="text" id="batch">
+          <input type="submit" >
+      </form>
+    </div>
+</body>
+</html>
+<script>
+var arr=JSON.parse(localStorage.getItem("info")) || []
+function myfunc(event){
+    event.preventDefault();
+
+var form=document.getElementById("form")
+
+var naam=form.name.value;
+var image=form.url.value;
+var course=form.course.value;
+var unit=form.unit.value;
+var bacth=form.batch.value;
+
+var get= new detail(naam,image,course,unit,bacth)
+arr.push(get)
+localStorage.setItem("info",JSON.stringify(arr))
+window.location.href="display.html"
+}
+
+function detail(name,image,course,unit,bacth){
+    this.name=name
+    this.img_url=image
+    this.crs=course
+    this.unt=unit
+    this.bth=bacth
+}
+</script>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>details of students</title>
+    <style>
+        body{
+            /* background-color:#de6262  #ffb88c; */
+            background: linear-gradient(110deg, #fdcd3b 60%, #ffed4b 60%);
+           
+    }
+        table {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 60%;
+        margin: auto;
+        margin-top: 50px;
+        text-align: center;
+        }
+
+table td,
+table th {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: center;
+  background-color: #ffb88c;
+  color: white;
+}
+#a2ns{
+  width: 100px;
+  height: 100px;
+}
+table th{
+    background-color: darkgoldenrod;
+    color: white;
+}
+h1{
+margin: auto;
+text-align: center;
+}
+table th:hover{
+    background-color: darkred;
+}
+table td:hover{
+    background-color: mediumvioletred;
+}
+    </style>
+</head>
+<body>
+    <h1>DETAILS OF STUDENTS</h1>
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Student_image</th>
+                    <th>Name</th>
+                    <th>Course</th>
+                    <th>Unit</th>
+                    <th>Batch</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+            
+            
+        </table>
+    </div>
+</body>
+</html>
+<script>
+    var arr=JSON.parse(localStorage.getItem("info"))
+
+    function display(arr){
+        arr.forEach(function (ele,index){
+        var tr=document.createElement("tr")
+
+        var td1=document.createElement("td")
+        var img=document.createElement("img")
+        img.setAttribute("src",ele.img_url)
+        img.setAttribute("id","a2ns")
+        td1.append(img)
+
+        var td2=document.createElement("td")
+        td2.innerText=ele.name
+
+        var td3=document.createElement("td")
+        td3.innerText=ele.crs
+
+        var td4=document.createElement("td")
+        td4.innerText=ele.unt
+
+        var td5=document.createElement("td")
+        td5.innerText=ele.bth
+
+        var td6=document.createElement("td")
+        td6.innerText="Delete"
+        td6.style.cursor="pointer"
+        td6.style.color="red"
+        td6.addEventListener("click",function(){
+            delrow(ele,index)
+        })
+
+        tr.append(td1,td2,td3,td4,td5,td6)
+        document.querySelector("tbody").append(tr)
+
+        })
+    }
+    display(arr)
+
+    function delrow(ele,index){
+      var trashbox=JSON.parse(localStorage.getItem("Trash"))||[];
+      trashbox.push(ele)
+      localStorage.setItem("Trash",JSON.stringify(trashbox))
+
+      arr.splice(index,1)
+      localStorage.setItem("info",JSON.stringify(arr))
+      window.location.reload()
+
+    }
+
+</script>
