@@ -54,26 +54,36 @@
             input[type="submit"]:hover{
                 background-color:blueviolet;
             }
+            #navbar{
+                height: 100px;
+                width: 100%;
+                border: 1px solid;
+            }
         
     </style>
 </head>
 <body>
+    <div id="navbar">
+      <h1>Number of Student in Batch</h1>
+      
+    </div>
     <div id="a1ns">
       <h1>Student Management System</h1>
       <form id="form" onsubmit="myfunc(event)">
           <label>Student name</label><br>
-          <input type="text" id="name"><br>
+          <input type="text" id="name" required><br>
           <label>Student image url</label><br>
-          <input type="url" id="url"><br>
+          <input type="url" id="url" required><br>
           <label>Course</label><br>
-          <input type="text" id="course"><br>
+          <input type="text" id="course" required><br>
           <label>Unit</label><br>
-          <input type="text" id="unit"><br>
+          <input type="text" id="unit" required><br>
           <label>Batch</label><br>
-          <input type="text" id="batch">
+          <input type="text" id="batch" required>
           <input type="submit" >
       </form>
     </div>
+    
 </body>
 </html>
 <script>
@@ -100,6 +110,42 @@ function detail(name,image,course,unit,bacth){
     this.img_url=image
     this.crs=course
     this.unt=unit
-    this.bth=bacth
+    this.bth=`ft-web${bacth}`
 }
+var batches=document.createElement("h3")
+function calculate(){
+    let obj={};
+    let arr=JSON.parse(localStorage.getItem("info")) ||[]
+
+    for(let i=0;i<arr.length;i++){
+        if(!obj[arr[i].bth]){
+            obj[arr[i].bth]=0
+        }
+    }
+
+    for(let i=0;i<arr.length;i++){
+         obj[arr[i].bth]++;
+    }
+
+    
+    //var newbatch=document.createElement("h3")
+   //localStorage.setItem("object",JSON.stringify(obj))
+   
+   
+   for(var key in obj){
+        batches.innerText+=`${key}-${obj[key]} ||`; 
+    }
+    document.getElementById("navbar").append(batches)
+ 
+       
+}
+calculate()
+// var batches=document.createElement("h3")
+// var river=JSON.parse(localStorage.getItem("object"))
+
+
+
+
+
+
 </script>
